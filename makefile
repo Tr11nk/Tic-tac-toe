@@ -11,7 +11,7 @@ $(MAIN): main.c
 $(GAME): game.c
 	$(CC) -c -o $(GAME) game.c
 tic-tac-toe: $(CONS) $(MAIN) $(GAME)
-	$(CC) $(MAIN) $(CONS) $(GAME) -lncurses  -o tic_tac_toe
+	$(CC)   $(GAME) $(CONS) $(MAIN)  -o tic_tac_toe -lncurses
 
 clean:
 	rm -f $(CONS) $(MAIN) $(GAME)

@@ -1,13 +1,13 @@
 #include "display.h"
 #include <stdbool.h>
-
-int make_move(char move, char a[][N], int flag) {
+int make_move(char move, char a[][N], int flag, int *full) {
   int choice = move - '1';
   int row = choice / N;
   int col = choice % N;
-  if (a[row][col] == ' ')
+  if (a[row][col] == ' ') {
     a[row][col] = (flag == FIR) ? X : O;
-  else
+    (*full)++;
+  } else
     return 1;
   return 0;
 }
@@ -33,7 +33,7 @@ int pobeda(char a[][3]) {
   return 0;
 }
 
-int pobeda_Lanes(char a[][3], char ch) {
+int check_victory_lanes(char a[][3], char ch) {
   bool cols, rows;
   for (int i = 0; i < N; i++) {
     cols = true, rows = true;
@@ -46,7 +46,7 @@ int pobeda_Lanes(char a[][3], char ch) {
   }
   return 0;
 }
-int pobeda_Diag(char a[][3], char ch) {
+int check_victory_Diag(char a[][3], char ch) {
   bool toright, toleft;
   toright = true, toleft = true;
   for (int i = 0; i < N; i++) {
